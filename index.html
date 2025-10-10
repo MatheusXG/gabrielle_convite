@@ -152,8 +152,8 @@
       margin-top: clamp(30px, 8vh, 60px);
       /* move o texto mais para baixo */
       /* border: 2px solid rgba(255, 17, 0, 0.5); */
-      height: 200px;
-      margin-top: 110px;
+      height: 190px;
+      margin-top: 95px;
 
     }
 
@@ -196,7 +196,7 @@
       font-size: clamp(0.9rem, 4vw, 1.2rem);
       color: #f6b53a;
       text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-      margin-top: 5px;
+      margin-top: 15px;
 
     }
 
@@ -209,13 +209,13 @@
 
     .date {
       text-align: center;
-      padding: clamp(20px, 3vw, 25px);  
-      margin-top: 10px; 
+      padding: clamp(20px, 3vw, 25px);
+      margin-top: 10px;
       /* border: 2px solid red; */
       border-top: 1px solid;
       border-bottom: 1px solid;
       border-image: linear-gradient(to right, transparent, #ffd700, transparent) 1;
-     
+
     }
 
     .day {
@@ -233,7 +233,7 @@
       text-align: center;
       /* border: 2px solid rgba(255, 0, 0, 0.5); */
       height: 150px;
-      margin-bottom: 130px;
+      margin-bottom: 180px;
 
 
     }
@@ -274,7 +274,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 10px;
     }
 
     .footer {
@@ -282,6 +282,127 @@
       font-size: clamp(0.75rem, 3vw, 0.9rem);
       color: #e0e0e0;
       padding-bottom: clamp(10px, 3vw, 20px);
+    }
+
+    /* Botões com labels */
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .button-label {
+      font-size: clamp(0.65rem, 2.5vw, 0.8rem);
+      color: #e0e0e0;
+      text-align: center;
+      max-width: 90px;
+      line-height: 1.2;
+    }
+
+    /* MODAL DRESS CODE */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(4, 26, 59, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: linear-gradient(to bottom, rgba(4, 26, 59, 0.95), rgba(11, 29, 63, 0.95));
+      border: 2px solid rgba(212, 175, 55, 0.5);
+      border-radius: 16px;
+      padding: clamp(20px, 4vw, 30px);
+      max-width: 90%;
+      width: 400px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: #ffd166;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      color: #f6b53a;
+      transform: scale(1.1);
+    }
+
+    .modal-title {
+      font-family: 'Dancing Script', cursive;
+      color: #ffd166;
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .dress-code-info {
+      text-align: left;
+      margin: 20px 0;
+    }
+
+    .dress-item {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      border-left: 3px solid #ffd166;
+    }
+
+    .dress-icon {
+      font-size: 1.5rem;
+      color: #ffd166;
+      margin-right: 15px;
+      width: 30px;
+      text-align: center;
+    }
+
+    .dress-text {
+      flex: 1;
+      font-size: 0.9rem;
+      color: #e0e0e0;
+    }
+
+    .dress-note {
+      font-style: italic;
+      font-size: 0.8rem;
+      color: #f6b53a;
+      margin-top: 15px;
+      text-align: center;
+      padding: 10px;
+      background: rgba(255, 209, 102, 0.1);
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -291,41 +412,84 @@
   <div class="fog"></div>
   <div class="stars" id="stars-container"></div>
 
+  <!-- Modal Dress Code -->
+  <div class="modal-overlay" id="dressCodeModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">&times;</button>
+      <h2 class="modal-title">Dress Code</h2>
+      <div class="dress-code-info">
+
+        <div class="dress-item">
+          <div class="dress-text">
+            <strong>Esporte Fino: </strong> Um estilo elegante, porém confortável e moderno, que equilibra o casual e o
+            formal. O objetivo é um visual arrumado e alinhado, sem a rigidez do traje social completo.
+          </div>
+        </div>
+        <div class="dress-item">
+          <div class="dress-icon">👔</div>
+          <div class="dress-text">
+            <strong>Homens: </strong> Calça social ou de sarja, jeans, camisa social, camisa lisa, ou polo. Sapato 
+            social, sapatênis.
+          </div>
+        </div>
+        <div class="dress-item">
+          <div class="dress-icon">👗</div>
+          <div class="dress-text">
+            <strong>Mulheres:</strong> Vestidos mais sofisticados, macacões ou conjuntos de alfaiataria.
+          </div>
+        </div>
+
+      </div>
+      <div class="dress-note">
+        ✨ Vista-se para celebrar esta noite especial com estilo e conforto!
+      </div>
+    </div>
+  </div>
+
   <div class="invitation-card">
     <div class="header">
       <div class="name">Meus 15 anos</div>
       <div class="name2">Gabrielle</div>
       <div class="quote">"Não tenho certeza de nada, mas a visão das estrelas me faz sonhar."</div>
       <div class="presence">Conto com a sua presença!</div>
-
-
     </div>
 
     <div class="divider">
       <div class="date">
         <div class="day">QUINTA-FEIRA</div>
         <div class="time">27 DE NOVEMBRO | 18h30</div>
-        <div class="quote">Traje: Esporte Fino</div>
-        <div class="presence">*Confirmar até o dia 25/11*</div>
-
+        <!-- <div class="quote">Traje: Esporte Fino</div> -->
+        <div class="presence">*Confirmar até o dia 20/11*</div>
       </div>
     </div>
 
-
     <div class="buttons-section">
       <div class="buttons">
-        <button class="btn" id="confirmBtn" title="Confirmar Presença">
-          <i class="fab fa-whatsapp"></i>
-        </button>
-        <button class="btn" id="locationBtn" title="Ver Localização">
-          <i class="fas fa-map-marker-alt"></i>
-        </button>
-      
+        <div class="button-container">
+          <div class="button-label">CONFIRMAR PRESENÇA</div>
+          <button class="btn" id="confirmBtn" title="Confirmar Presença">
+            <i class="fab fa-whatsapp"></i>
+          </button>
+        </div>
+
+        <div class="button-container">
+          <div class="button-label">VER<br>ROTA</div>
+          <button class="btn" id="locationBtn" title="Ver Localização">
+            <i class="fas fa-map-marker-alt"></i>
+          </button>
+
+        </div>
+
+        <div class="button-container">
+          <div class="button-label">DRESS<br>CODE</div>
+          <button class="btn" id="dressCodeBtn" title="Dress Code">
+            <i class="fas fa-shirt"></i>
+          </button>
+        </div>
       </div>
       <div class="buttons-title">
         <i class="fas fa-hand-pointer"></i> Clique nos botões para interagir
       </div>
-      
     </div>
 
     <div class="footer"></div>
@@ -342,6 +506,26 @@
     // Localização
     document.getElementById('locationBtn').addEventListener('click', () => {
       window.open('https://maps.app.goo.gl/3HcrXZETL6L4LDJs9', '_blank');
+    });
+
+    // Dress Code Modal
+    const dressCodeBtn = document.getElementById('dressCodeBtn');
+    const dressCodeModal = document.getElementById('dressCodeModal');
+    const closeModal = document.getElementById('closeModal');
+
+    dressCodeBtn.addEventListener('click', () => {
+      dressCodeModal.classList.add('active');
+    });
+
+    closeModal.addEventListener('click', () => {
+      dressCodeModal.classList.remove('active');
+    });
+
+    // Fechar modal clicando fora
+    dressCodeModal.addEventListener('click', (e) => {
+      if (e.target === dressCodeModal) {
+        dressCodeModal.classList.remove('active');
+      }
     });
 
     // Estrelas
