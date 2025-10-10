@@ -403,6 +403,148 @@
       padding: 10px;
       background: rgba(255, 209, 102, 0.1);
       border-radius: 8px;
+
+
+    }
+
+    /* Botão de controle de música */
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.3), rgba(4, 26, 59, 0.7));
+      color: #ffd166;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .music-control:hover {
+      transform: scale(1.1);
+      background: rgba(255, 209, 102, 0.2);
+      box-shadow: 0 0 20px rgba(255, 209, 102, 0.5);
+    }
+
+    /* === ADICIONE A MEDIA QUERY AQUI === */
+    /* Media Query para iPhone 8 e iPhone SE (375px) */
+    @media (max-width: 375px) {
+      .header {
+        height: 170px;
+        margin-top: 80px;
+        padding: 12px 15px;
+      }
+
+      .name2 {
+        font-size: 2.8rem;
+      }
+
+      .name:first-child {
+        font-size: 2.3rem;
+      }
+
+      .quote {
+        font-size: 0.8rem;
+        margin-top: 8px;
+      }
+
+      .presence {
+        font-size: 0.85rem;
+        margin-top: 12px;
+      }
+
+      .date {
+        padding: 15px 12px;
+      }
+
+      .day {
+        font-size: 0.95rem;
+      }
+
+      .time {
+        font-size: 0.8rem;
+      }
+
+      .buttons-section {
+        padding: 15px 12px;
+        height: 140px;
+        margin-bottom: 160px;
+      }
+
+      .buttons {
+        gap: 12px;
+      }
+
+      .btn {
+        width: 52px;
+        height: 52px;
+        font-size: 1.3rem;
+      }
+
+      .button-label {
+        font-size: 0.6rem;
+        max-width: 65px;
+      }
+
+      .buttons-title {
+        font-size: 0.7rem;
+        gap: 6px;
+      }
+
+      .footer {
+        font-size: 0.7rem;
+        padding-bottom: 8px;
+      }
+
+      /* Ajustes do Modal para telas pequenas */
+      .modal-content {
+        max-width: 95%;
+        width: 340px;
+        padding: 18px;
+      }
+
+      .modal-title {
+        font-size: 1.7rem;
+        margin-bottom: 15px;
+      }
+
+      .dress-item {
+        margin: 10px 0;
+        padding: 8px;
+      }
+
+      .dress-text {
+        font-size: 0.75rem;
+      }
+
+      .dress-icon {
+        font-size: 1.1rem;
+        margin-right: 10px;
+        width: 22px;
+      }
+
+      .dress-note {
+        font-size: 0.7rem;
+        margin-top: 12px;
+        padding: 8px;
+      }
+
+      /* Ajuste do botão de música para mobile */
+      .music-control {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        bottom: 15px;
+        right: 15px;
+      }
     }
   </style>
 </head>
@@ -411,6 +553,11 @@
   <div class="fog"></div>
   <div class="fog"></div>
   <div class="stars" id="stars-container"></div>
+
+  <!-- Botão de controle de música -->
+  <button class="music-control" id="musicControl" title="Controle de Música">
+    <i class="fas fa-volume-up"></i>
+  </button>
 
   <!-- Modal Dress Code -->
   <div class="modal-overlay" id="dressCodeModal">
@@ -428,7 +575,7 @@
         <div class="dress-item">
           <div class="dress-icon">👔</div>
           <div class="dress-text">
-            <strong>Homens: </strong> Calça social ou de sarja, jeans, camisa social, camisa lisa, ou polo. Sapato 
+            <strong>Homens: </strong> Calça social ou de sarja, jeans, camisa social, camisa lisa ou polo. Sapato
             social, sapatênis.
           </div>
         </div>
@@ -495,6 +642,13 @@
     <div class="footer"></div>
   </div>
 
+  <!-- Áudio da música -->
+  <audio id="musicaConvite" loop>
+    <source src="audio/Van Gogh - Virginio Aiello.mp3" type="audio/mpeg">
+    <source src="audio/Van Gogh - Virginio Aiello.mp3" type="audio/ogg">
+    Seu navegador não suporta áudio HTML5.
+  </audio>
+
   <script>
     // WhatsApp
     document.getElementById('confirmBtn').addEventListener('click', () => {
@@ -554,6 +708,62 @@
     }
 
     setInterval(() => Math.random() > 0.7 && shootingStar(), 4000);
+
+    // SISTEMA DE MÚSICA
+    const audio = document.getElementById('musicaConvite');
+    const musicControl = document.getElementById('musicControl');
+    const musicIcon = musicControl.querySelector('i');
+
+    // Tenta iniciar a música automaticamente
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        audio.volume = 0.5; // Volume em 70%
+        
+        audio.addEventListener('loadeddata', function() {
+          // Define para começar nos 30 segundos
+          audio.currentTime = 33;
+          
+          // Tenta tocar automaticamente
+          const playPromise = audio.play();
+          
+          if (playPromise !== undefined) {
+            playPromise.catch(function(error) {
+              console.log('Autoplay bloqueado, aguardando interação do usuário');
+              musicControl.style.background = 'radial-gradient(circle, rgba(255, 100, 100, 0.3), rgba(4, 26, 59, 0.7))';
+            });
+          }
+        });
+        
+        // Carrega o áudio
+        audio.load();
+      }, 1000); // Pequeno delay para carregar a página primeiro
+    });
+
+    // Controle de música
+    musicControl.addEventListener('click', function() {
+      if (audio.paused) {
+        audio.currentTime = 33;
+        audio.play();
+        musicIcon.className = 'fas fa-volume-up';
+        musicControl.style.background = 'radial-gradient(circle, rgba(212, 175, 55, 0.3), rgba(4, 26, 59, 0.7))';
+      } else {
+        audio.pause();
+        musicIcon.className = 'fas fa-volume-mute';
+        musicControl.style.background = 'radial-gradient(circle, rgba(255, 100, 100, 0.3), rgba(4, 26, 59, 0.7))';
+      }
+    });
+
+    // Atualiza ícone quando a música termina
+    audio.addEventListener('ended', function() {
+      musicIcon.className = 'fas fa-volume-mute';
+    });
+
+    // Atualiza ícone quando há erro
+    audio.addEventListener('error', function() {
+      musicIcon.className = 'fas fa-exclamation-triangle';
+      musicControl.style.background = 'radial-gradient(circle, rgba(255, 100, 100, 0.5), rgba(4, 26, 59, 0.7))';
+      console.error('Erro ao carregar o áudio');
+    });
   </script>
 </body>
 
