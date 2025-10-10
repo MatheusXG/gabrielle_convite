@@ -1,343 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Convite de 15 Anos - Gabrielle</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Convite - Meus 15 anos</title>
   <style>
-    * {
+    /* Garante que a página use toda a tela sem rolagem */
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden; /* remove a rolagem */
-      font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(ellipse at bottom, #0b1d3f 0%, #041a3b 100%);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: clamp(10px, 3vw, 20px);
-    }
-
-    /* Névoa */
-    .fog {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(200, 220, 255, 0.08) 20%, transparent 70%);
-      animation: moveFog 60s linear infinite;
-      filter: blur(100px);
-      opacity: 0.2;
-      pointer-events: none;
-    }
-
-    .fog:nth-child(2) {
-      animation-duration: 90s;
-      opacity: 0.15;
-    }
-
-    @keyframes moveFog {
-      from {
-        transform: translateX(-20%) translateY(-10%);
-      }
-
-      to {
-        transform: translateX(20%) translateY(10%);
-      }
-    }
-
-    /* Estrelas */
-    .stars {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
       height: 100%;
       overflow: hidden;
-      z-index: -2;
+      font-family: "Poppins", sans-serif;
+      background-color: #000;
     }
 
-    .star {
-      position: absolute;
-      border-radius: 50%;
-      background: #ffd166;
-      opacity: 0.7;
-      box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
-      animation: twinkle 3s infinite ease-in-out alternate;
-    }
-
-    @keyframes twinkle {
-      0% {
-        opacity: 0.3;
-        transform: scale(0.8);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.4);
-      }
-
-      100% {
-        opacity: 0.3;
-        transform: scale(1);
-      }
-    }
-
-    /* Estrela cadente */
-    .shooting-star {
-      position: absolute;
-      width: 2px;
-      height: 80px;
-      background: linear-gradient(white, transparent);
-      opacity: 0.8;
-      transform: rotate(45deg);
-      pointer-events: none;
-      animation: shoot 1.5s linear forwards;
-    }
-
-    @keyframes shoot {
-      0% {
-        transform: translate(0, 0) rotate(45deg);
-        opacity: 1;
-      }
-
-      80% {
-        opacity: 1;
-      }
-
-      100% {
-        transform: translate(-300px, 300px) rotate(45deg);
-        opacity: 0;
-      }
-    }
-
-    /* Card principal */
-    .invitation-card {
-      width: 100%;
-      max-width: 500px;
-      aspect-ratio: 9 / 16; /* garante proporção e elimina rolagem */
-      background: linear-gradient(to bottom, rgba(4, 26, 59, 0.25), rgba(4, 26, 59, 0.35)),
-        url('images/noite_estrelada.jpg') center/cover no-repeat;
-      border-radius: 16px;
-      border: 2px solid rgba(212, 175, 55, 0.5);
-      overflow: hidden;
+    /* Container principal responsivo */
+    .container {
       position: relative;
-      z-index: 1;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      height: 100vh;
+      width: 100vw;
+      background: url('https://i.ibb.co/HP1CMnR/night-sky-sunflowers.jpg') no-repeat center center;
+      background-size: cover;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: center;
     }
 
-    .header {
-      flex: 1;
-      padding: clamp(20px, 5vw, 40px) clamp(10px, 4vw, 25px);
+    /* Card central com leve transparência */
+    .card {
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 24px;
+      padding: 5vw;
       text-align: center;
+      color: white;
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+      max-width: 90vw;
+      max-height: 80vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin-top: clamp(15px, 5vh, 40px); /* move o texto mais para baixo */
     }
 
+    /* Título: "Meus 15 anos" */
+    .title {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      margin-bottom: 2vh;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    /* Nome: "Gabrielle" */
     .name {
-      font-family: 'Dancing Script', cursive;
-      color: #ffd166;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-      line-height: 1.2;
-    }
-
-    .name:first-child {
-      font-size: clamp(2rem, 7vw, 3.2rem);
-    }
-
-    .name:last-child {
-      font-size: clamp(2.8rem, 9.5vw, 4rem); /* Gabrielle maior */
-      margin: clamp(10px, 3vw, 25px) 0;
-    }
-
-    .quote {
-      font-style: italic;
-      font-size: clamp(0.85rem, 3.5vw, 1.1rem);
-      margin: clamp(10px, 3vw, 20px) 0;
-      color: #e0e0e0;
-    }
-
-    .presence {
-      font-style: italic;
-      font-size: clamp(0.9rem, 4vw, 1.2rem);
-      color: #f6b53a;
-    }
-
-    .divider {
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, #ffd700, transparent);
-      margin: auto;
-    }
-
-    .date {
-      text-align: center;
-      padding: clamp(10px, 4vw, 20px);
-    }
-
-    .day {
-      font-size: clamp(1rem, 4.5vw, 1.5rem);
+      font-size: clamp(2.5rem, 7vw, 5rem);
       font-weight: 600;
-      color: #f6b53a;
+      margin-bottom: 2.5vh;
+      color: #ffd700;
     }
 
-    .time {
-      font-size: clamp(0.95rem, 4vw, 1.3rem);
+    /* Texto principal */
+    .text {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      line-height: 1.4;
+      margin-bottom: 2vh;
     }
 
-    .buttons-section {
-      padding: clamp(10px, 4vw, 25px);
-      text-align: center;
+    /* Data */
+    .date {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 500;
+      color: #fff8dc;
     }
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: clamp(10px, 4vw, 25px);
-      margin-bottom: clamp(10px, 4vw, 25px);
+    /* Responsividade adicional para telas muito pequenas */
+    @media (max-height: 600px) {
+      .card {
+        padding: 4vw;
+      }
+      .name {
+        font-size: clamp(2.2rem, 8vw, 4rem);
+      }
     }
 
-    .btn {
-      width: clamp(60px, 20vw, 85px);
-      height: clamp(60px, 20vw, 85px);
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.2), rgba(4, 26, 59, 0.6));
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-      color: #d4af37;
-      font-size: clamp(1.5rem, 6vw, 2.2rem);
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 209, 102, 0.14);
-      box-shadow: 0 0 25px rgba(255, 209, 102, 0.24);
-    }
-
-    .buttons-title {
-      font-size: clamp(0.75rem, 3.2vw, 1rem);
-      color: #e0e0e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .footer {
-      text-align: center;
-      font-size: clamp(0.75rem, 3vw, 0.9rem);
-      color: #e0e0e0;
-      padding-bottom: clamp(10px, 3vw, 20px);
+    @media (max-width: 400px) {
+      .card {
+        padding: 6vw;
+      }
+      .text {
+        font-size: clamp(0.9rem, 4vw, 1.2rem);
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="fog"></div>
-  <div class="fog"></div>
-  <div class="stars" id="stars-container"></div>
-
-  <div class="invitation-card">
-    <div class="header">
-      <div class="name">Meus 15 anos</div>
+  <div class="container">
+    <div class="card">
+      <div class="title">Meus 15 anos</div>
       <div class="name">Gabrielle</div>
-      <div class="quote">"Não tenho certeza de nada, mas a visão das estrelas me faz sonhar."</div>
-      <div class="presence">Conto com a sua presença!</div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="date">
-      <div class="day">QUINTA-FEIRA</div>
-      <div class="time">27 DE NOVEMBRO | 18h30</div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="buttons-section">
-      <div class="buttons">
-        <button class="btn" id="confirmBtn" title="Confirmar Presença">
-          <i class="fab fa-whatsapp"></i>
-        </button>
-        <button class="btn" id="locationBtn" title="Ver Localização">
-          <i class="fas fa-map-marker-alt"></i>
-        </button>
+      <div class="text">
+        Uma noite especial sob as estrelas.<br />
+        Prepare-se para celebrar este momento mágico comigo.
       </div>
-      <div class="buttons-title">
-        <i class="fas fa-hand-pointer"></i> Clique nos botões para interagir
-      </div>
+      <div class="date">27 de Novembro de 2025</div>
     </div>
-
-    <div class="footer"></div>
   </div>
-
-  <script>
-    // WhatsApp
-    document.getElementById('confirmBtn').addEventListener('click', () => {
-      const phone = '5561984315415';
-      const msg = encodeURIComponent('Olá! Confirmo minha presença na festa de 15 anos da Gabrielle. ✨');
-      window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-    });
-
-    // Localização
-    document.getElementById('locationBtn').addEventListener('click', () => {
-      window.open('https://goo.gl/maps/examplelocation', '_blank');
-    });
-
-    // Estrelas
-    const starsContainer = document.getElementById('stars-container');
-    const starCount = Math.min(120, Math.floor(window.innerWidth / 5));
-    for (let i = 0; i < starCount; i++) {
-      const s = document.createElement('div');
-      s.classList.add('star');
-      const size = Math.random() * 2.5 + 1;
-      s.style.width = `${size}px`;
-      s.style.height = `${size}px`;
-      s.style.top = `${Math.random() * 100}%`;
-      s.style.left = `${Math.random() * 100}%`;
-      s.style.animationDuration = `${2 + Math.random() * 3}s`;
-      starsContainer.appendChild(s);
-    }
-
-    // Estrelas cadentes
-    function shootingStar() {
-      const star = document.createElement('div');
-      star.classList.add('shooting-star');
-      star.style.top = `${Math.random() * 50}%`;
-      star.style.left = `${Math.random() * 100}%`;
-      starsContainer.appendChild(star);
-      setTimeout(() => star.remove(), 2000);
-    }
-
-    setInterval(() => Math.random() > 0.7 && shootingStar(), 4000);
-  </script>
 </body>
-
 </html>
