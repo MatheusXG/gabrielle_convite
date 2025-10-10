@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Convite de 15 Anos - Gabrielle</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            min-height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(ellipse at bottom, #0b1d3f 0%, #041a3b 100%);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        /* Névoa */
+        .fog {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(200, 220, 255, 0.08) 20%, transparent 70%);
+            animation: moveFog 60s linear infinite;
+            filter: blur(100px);
+            opacity: 0.2;
+        }
+
+        .fog:nth-child(2) {
+            animation-duration: 90s;
+            opacity: 0.15;
+        }
+
+        @keyframes moveFog {
+            from {
+                transform: translateX(-20%) translateY(-10%);
+            }
+            to {
+                transform: translateX(20%) translateY(10%);
+            }
+        }
+
+        /* Container de estrelas */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -2;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: #ffd166;          
+            opacity: 0.7;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+            animation: twinkle 3s infinite ease-in-out alternate;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.3;
+                transform: scale(0.8);
+                box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.4);
+                box-shadow: 0 0 12px rgba(255, 255, 255, 1);
+            }
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+                box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        /* Estrela cadente */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 80px;
+            background: linear-gradient(white, transparent);
+            opacity: 0.8;
+            transform: rotate(45deg);
+            pointer-events: none;
+            animation: shoot 1.5s linear forwards;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translate(0, 0) rotate(45deg);
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-300px, 300px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        /* Convite */
+        .invitation-card {
+            width: 100%;
+            max-width: 500px;
+            min-width: 280px;
+            background: linear-gradient(to bottom, rgba(4, 26, 59, 0.2), rgba(4, 26, 59, 0.3)),
+                url('images/noite_estrelada.jpg') center/cover no-repeat;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .invitation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 26, 59, 0.2);
+            z-index: -1;
+        }
+
+        .header {
+            padding: clamp(30px, 8vw, 60px) 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: clamp(25px, 6vw, 45px);
+        }
+
+        .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.2rem, 9vw, 3.2rem); /* Ajustado para um pouco menor */
+            color: #ffd166;
+            margin-top: clamp(20px, 5vw, 35px);
+            margin-bottom: clamp(15px, 4vw, 25px);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            line-height: 1.2;
+        }
+
+        .age {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+            margin: clamp(15px, 4vw, 20px) 0;
+            padding: 0 clamp(15px, 4vw, 20px);
+            line-height: 1.5;
+            color: #e0e0e0;
+        }
+
+        .presence {
+            font-style: italic;
+            font-size: clamp(0.9rem, 4vw, 1.2rem);
+            margin-bottom: clamp(10px, 3vw, 15px);
+            color: #f6b53a;
+        }
+
+        .divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ffd700, transparent);
+            margin: 0 auto;
+        }
+
+        .date {
+            padding: clamp(15px, 4vw, 20px) 15px;
+            text-align: center;
+        }
+
+        .day {
+            font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #f6b53a;
+        }
+
+        .time {
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            font-weight: 400;
+        }
+
+        .buttons-section {
+            padding: clamp(15px, 4vw, 20px);
+            text-align: center;
+        }
+
+        .buttons-title {
+            font-size: clamp(0.75rem, 3.2vw, 1rem);
+            margin-bottom: clamp(20px, 5vw, 30px);
+            color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: clamp(20px, 6vw, 30px);
+            margin-bottom: clamp(15px, 4vw, 25px);
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            width: clamp(60px, 22vw, 80px);
+            height: clamp(60px, 22vw, 80px);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, rgba(4, 26, 59, 0.6) 70%);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            color: #d4af37;
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 209, 102, .14);
+            box-shadow: 0 0 16px rgba(255, 209, 102, .24);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 209, 102, .14);
+            box-shadow: 0 0 25px rgba(255, 209, 102, .24);
+        }
+
+        .btn:hover::before {
+            opacity: 0.3;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            pointer-events: none;
+        }
+
+        .footer {
+            padding: clamp(15px, 4vw, 20px);
+            text-align: center;
+            font-size: clamp(0.75rem, 3vw, 0.9rem);
+            color: #e0e0e0;
+        }
+
+        /* Melhorias para telas muito pequenas */
+        @media (max-width: 375px) {
+            body {
+                padding: 10px;
+            }
+            
+            .invitation-card {
+                min-width: 260px;
+            }
+            
+            .header {
+                padding: 25px 10px;
+            }
+            
+            .buttons {
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 65px;
+                height: 65px;
+            }
+        }
+
+        /* Melhorias para telas maiores */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+        }
+
+        /* Ajuste para orientação paisagem em dispositivos móveis */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+                padding-bottom: 20px;
+            }
+            
+            .name {
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .quote {
+                margin: 10px 0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Névoa -->
+    <div class="fog"></div>
+    <div class="fog"></div>
+
+    <!-- Estrelas -->
+    <div class="stars" id="stars-container"></div>
+
+    <!-- Convite -->
+    <div class="invitation-card">
+        <div class="header">
+            <div class="name">Meus 15 anos</div>
+            <div class="name">Gabrielle</div>
+            <div class="quote">"Não tenho certeza de nada, mas a visão das estrelas me faz sonhar."</div>
+            <div class="presence">Conto com a sua presença!</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="date">
+            <div class="day">QUINTA-FEIRA</div>
+            <div class="time">27 DE NOVEMBRO | 18h30</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="buttons-section">
+            <div class="buttons">
+                <button class="btn btn-confirm" id="confirmBtn" title="Confirmar Presença">
+                    <i class="fab fa-whatsapp"></i>
+                </button>
+                <button class="btn btn-location" id="locationBtn" title="Ver Localização">
+                    <i class="fas fa-map-marker-alt"></i>
+                </button>
+            </div>
+            <div class="buttons-title">
+                <i class="fas fa-hand-pointer"></i> Clique nos botões para interagir
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Botão de Confirmação
+        document.getElementById('confirmBtn').addEventListener('click', function () {
+            const phoneNumber = '5561984315415';
+            const message = encodeURIComponent('Olá! Confirmo minha presença na festa de 15 anos da Gabrielle. ✨');
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        });
+
+        // Botão de Localização
+        document.getElementById('locationBtn').addEventListener('click', function () {
+            window.open('https://goo.gl/maps/examplelocation', '_blank');
+        });
+
+        // Estrelas - ajuste responsivo
+        const starsContainer = document.getElementById('stars-container');
+        const starCount = window.innerWidth < 400 ? 60 : 120;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 3 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.opacity = Math.random() * 0.5 + 0.5;
+            star.style.animationDuration = (2 + Math.random() * 3).toFixed(1) + 's';
+            if (Math.random() > 0.85) star.style.boxShadow = '0 0 20px 4px rgba(255,255,255,0.9)';
+            starsContainer.appendChild(star);
+        }
+
+        // Estrelas cadentes
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.classList.add('shooting-star');
+            star.style.top = Math.random() * 50 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            starsContainer.appendChild(star);
+            setTimeout(() => star.remove(), 2000);
+        }
+
+        setInterval(() => { if (Math.random() > 0.7) createShootingStar(); }, 4000);
+    </script>
+</body>
+
+</html>
