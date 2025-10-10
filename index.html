@@ -3,14 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Convite de 15 Anos - Gabrielle</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     * {
@@ -139,20 +137,24 @@
       overflow: hidden;
       position: relative;
       z-index: 1;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      /* box-shadow: 0 0 25px rgba(0, 0, 0, 0.5); */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
     .header {
-      flex: 1;
       padding: clamp(15px, 4vw, 30px);
       text-align: center;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin-top: clamp(30px, 8vh, 60px); /* move o texto mais para baixo */
+      margin-top: clamp(30px, 8vh, 60px);
+      /* move o texto mais para baixo */
+      /* border: 2px solid rgba(255, 17, 0, 0.5); */
+      height: 200px;
+      margin-top: 110px;
+
     }
 
     .name {
@@ -162,38 +164,58 @@
       line-height: 1.2;
     }
 
-    .name:first-child {
-      font-size: clamp(2rem, 6vw, 3rem);
+    .name2 {
+      font-family: 'Dancing Script', cursive;
+      color: #ffd166;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      line-height: 1.2;
+      font-size: clamp(3.2rem, 6vw, 3rem);
+
     }
 
-    .name:last-child {
-      font-size: clamp(3.2rem, 9vw, 4.8rem); /* Gabrielle maior */
-      margin: clamp(12px, 3vw, 25px) 0;
+    .name:first-child {
+      font-size: clamp(2.5rem, 6vw, 3rem);
     }
+
+    /* .name:last-child {
+      font-size: clamp(3.2rem, 9vw, 4.8rem); 
+      margin: clamp(12px, 3vw, 25px) 0;
+    } */
 
     .quote {
       font-style: italic;
       font-size: clamp(0.85rem, 3.5vw, 1.1rem);
       margin: clamp(10px, 3vw, 20px) 0;
       color: #e0e0e0;
+      margin-top: 10px;
+
     }
 
     .presence {
       font-style: italic;
       font-size: clamp(0.9rem, 4vw, 1.2rem);
       color: #f6b53a;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      margin-top: 5px;
+
     }
 
-    .divider {
+    /* .divider {
       width: 80%;
       height: 1px;
       background: linear-gradient(to right, transparent, #ffd700, transparent);
       margin: auto;
-    }
+    } */
 
     .date {
       text-align: center;
-      padding: clamp(10px, 3vw, 20px);
+      padding: clamp(20px, 3vw, 25px);  
+      margin-top: 10px; 
+      /* border: 2px solid red; */
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+      border-image: linear-gradient(to right, transparent, #ffd700, transparent) 1;
+     
     }
 
     .day {
@@ -207,8 +229,13 @@
     }
 
     .buttons-section {
-      padding: clamp(10px, 3vw, 20px);
+      padding: clamp(20px, 3vw, 20px);
       text-align: center;
+      /* border: 2px solid rgba(255, 0, 0, 0.5); */
+      height: 150px;
+      margin-bottom: 60px;
+
+
     }
 
     .buttons {
@@ -267,19 +294,18 @@
   <div class="invitation-card">
     <div class="header">
       <div class="name">Meus 15 anos</div>
-      <div class="name">Gabrielle</div>
+      <div class="name2">Gabrielle</div>
       <div class="quote">"Não tenho certeza de nada, mas a visão das estrelas me faz sonhar."</div>
       <div class="presence">Conto com a sua presença!</div>
     </div>
 
-    <div class="divider"></div>
-
-    <div class="date">
-      <div class="day">QUINTA-FEIRA</div>
-      <div class="time">27 DE NOVEMBRO | 18h30</div>
+    <div class="divider">
+      <div class="date">
+        <div class="day">QUINTA-FEIRA</div>
+        <div class="time">27 DE NOVEMBRO | 18h30</div>
+      </div>
     </div>
 
-    <div class="divider"></div>
 
     <div class="buttons-section">
       <div class="buttons">
@@ -339,4 +365,5 @@
     setInterval(() => Math.random() > 0.7 && shootingStar(), 4000);
   </script>
 </body>
+
 </html>
