@@ -228,13 +228,21 @@
       font-size: clamp(0.9rem, 3.5vw, 1.2rem);
     }
 
+    .address {
+      font-size: clamp(0.85rem, 3vw, 1rem);
+      font-style: italic;
+      margin-top: 10px;
+      color: #e0e0e0;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 1);
+      line-height: 1.4;
+    }
+
     .buttons-section {
       padding: clamp(20px, 3vw, 20px);
       text-align: center;
       /* border: 2px solid rgba(255, 0, 0, 0.5); */
       height: 150px;
       margin-bottom: 180px;
-
 
     }
 
@@ -294,7 +302,8 @@
 
     .button-label {
       font-size: clamp(0.65rem, 2.5vw, 0.8rem);
-      color: #e0e0e0;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
       text-align: center;
       max-width: 90px;
       line-height: 1.2;
@@ -359,7 +368,8 @@
 
     .modal-title {
       font-family: 'Dancing Script', cursive;
-      color: #ffd166;
+      /* color: #ffd166; */
+      color: #fff;
       font-size: clamp(2rem, 5vw, 2.5rem);
       margin-bottom: 20px;
       text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
@@ -403,7 +413,6 @@
       padding: 10px;
       background: rgba(255, 209, 102, 0.1);
       border-radius: 8px;
-
 
     }
 
@@ -471,6 +480,11 @@
 
       .time {
         font-size: 0.8rem;
+      }
+
+      .address {
+        font-size: 0.75rem;
+        margin-top: 8px;
       }
 
       .buttons-section {
@@ -563,28 +577,28 @@
   <div class="modal-overlay" id="dressCodeModal">
     <div class="modal-content">
       <button class="modal-close" id="closeModal">&times;</button>
-      <h2 class="modal-title">Dress Code</h2>
+      <h2 class="modal-title">Esporte Fino</h2>
       <div class="dress-code-info">
 
-        <div class="dress-item">
+        <!-- <div class="dress-item">
           <div class="dress-text">
             <strong>Esporte Fino: </strong> Um estilo elegante, porém confortável e moderno, que equilibra o casual e o
-            formal. O objetivo é um visual arrumado e alinhado, sem a rigidez do traje social completo.
+            formal.
           </div>
-        </div>
-        <div class="dress-item">
+        </div> -->
+        <!-- <div class="dress-item">
           <div class="dress-icon">👔</div>
           <div class="dress-text">
             <strong>Homens: </strong> Calça social ou de sarja, jeans, camisa social, camisa lisa ou polo. Sapato
             social, sapatênis.
           </div>
-        </div>
-        <div class="dress-item">
+        </div> -->
+        <!-- <div class="dress-item">
           <div class="dress-icon">👗</div>
           <div class="dress-text">
             <strong>Mulheres:</strong> Vestidos mais sofisticados, macacões ou conjuntos de alfaiataria.
           </div>
-        </div>
+        </div> -->
 
       </div>
       <div class="dress-note">
@@ -606,6 +620,7 @@
         <div class="day">QUINTA-FEIRA</div>
         <div class="time">27 DE NOVEMBRO | 18h30</div>
         <!-- <div class="quote">Traje: Esporte Fino</div> -->
+        <div class="address">Park Way Q 3 Solar Garden - Park Way, Brasília - DF</div>
         <div class="presence">*Confirmar até o dia 20/11*</div>
       </div>
     </div>
@@ -715,32 +730,32 @@
     const musicIcon = musicControl.querySelector('i');
 
     // Tenta iniciar a música automaticamente
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       setTimeout(() => {
         audio.volume = 0.5; // Volume em 70%
-        
-        audio.addEventListener('loadeddata', function() {
+
+        audio.addEventListener('loadeddata', function () {
           // Define para começar nos 30 segundos
           audio.currentTime = 33;
-          
+
           // Tenta tocar automaticamente
           const playPromise = audio.play();
-          
+
           if (playPromise !== undefined) {
-            playPromise.catch(function(error) {
+            playPromise.catch(function (error) {
               console.log('Autoplay bloqueado, aguardando interação do usuário');
               musicControl.style.background = 'radial-gradient(circle, rgba(255, 100, 100, 0.3), rgba(4, 26, 59, 0.7))';
             });
           }
         });
-        
+
         // Carrega o áudio
         audio.load();
       }, 1000); // Pequeno delay para carregar a página primeiro
     });
 
     // Controle de música
-    musicControl.addEventListener('click', function() {
+    musicControl.addEventListener('click', function () {
       if (audio.paused) {
         audio.currentTime = 33;
         audio.play();
@@ -754,12 +769,12 @@
     });
 
     // Atualiza ícone quando a música termina
-    audio.addEventListener('ended', function() {
+    audio.addEventListener('ended', function () {
       musicIcon.className = 'fas fa-volume-mute';
     });
 
     // Atualiza ícone quando há erro
-    audio.addEventListener('error', function() {
+    audio.addEventListener('error', function () {
       musicIcon.className = 'fas fa-exclamation-triangle';
       musicControl.style.background = 'radial-gradient(circle, rgba(255, 100, 100, 0.5), rgba(4, 26, 59, 0.7))';
       console.error('Erro ao carregar o áudio');
