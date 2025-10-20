@@ -4,12 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Convite de 15 Anos - Gabrielle</title>
+  <title>Abrir Convite - Gabrielle</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <style>
     * {
       margin: 0;
@@ -68,7 +67,6 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      /* z-index: -1; */
     }
 
     .star {
@@ -125,439 +123,222 @@
       }
     }
 
-    /* CARD PRINCIPAL */
-    .invitation-card {
+    /* Container principal */
+    .transition-container {
       width: 100%;
-      max-width: 500px;
-      aspect-ratio: 9 / 16;
-      background: linear-gradient(to bottom, rgba(4, 26, 59, 0.25), rgba(4, 26, 59, 0.35)),
-        url('images/noite_estrelada.jpg') center/cover no-repeat;
-      border-radius: 16px;
-      border: 2px solid rgba(212, 175, 55, 0.5);
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-      /* box-shadow: 0 0 25px rgba(0, 0, 0, 0.5); */
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .header {
-      padding: clamp(15px, 4vw, 30px);
-      text-align: center;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin-top: clamp(30px, 8vh, 60px);
-      /* move o texto mais para baixo */
-      /* border: 2px solid rgba(255, 17, 0, 0.5); */
-      height: 190px;
-      margin-top: 95px;
-
+      align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
-    .name {
-      font-family: 'Dancing Script', cursive;
-      color: #ffd166;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-      line-height: 1.2;
+    /* Envelope */
+    .envelope-container {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      cursor: pointer;
+      margin-bottom: 40px;
     }
 
-    .name2 {
-      font-family: 'Dancing Script', cursive;
-      color: #ffd166;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-      line-height: 1.2;
-      font-size: clamp(3.2rem, 6vw, 3rem);
-
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
     }
 
-    .name:first-child {
-      font-size: clamp(2.5rem, 6vw, 3rem);
+    .envelope:hover {
+      transform: translateY(-10px);
     }
 
-    /* .name:last-child {
-      font-size: clamp(3.2rem, 9vw, 4.8rem); 
-      margin: clamp(12px, 3vw, 25px) 0;
-    } */
-
-    .quote {
-      font-style: italic;
-      font-size: clamp(0.85rem, 3.5vw, 1.1rem);
-      margin: clamp(10px, 3vw, 20px) 0;
-      color: #e0e0e0;
-      margin-top: 10px;
-
+    .envelope-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1a3a5f, #0b1d3f);
+      border-radius: 8px;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
 
-    .presence {
-      font-style: italic;
-      font-size: clamp(0.9rem, 4vw, 1.2rem);
-      color: #f6b53a;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-      margin-top: 15px;
-
+    .envelope-front {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #2a4a7f, #1a3a5f);
+      border-radius: 8px;
+      border: 2px solid rgba(212, 175, 55, 0.5);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
-    /* .divider {
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, #ffd700, transparent);
-      margin: auto;
-    } */
+    .envelope-flap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1a3a5f, #0b1d3f);
+      border-radius: 8px;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+      clip-path: polygon(0 0, 100% 0, 50% 50%);
+      transform-origin: top;
+      transition: transform 1s ease;
+      z-index: 2;
+    }
 
-    .date {
+    .envelope.open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    /* Laço do envelope */
+    .envelope-bow {
+      position: absolute;
+      top: -25px;
+      left: 40%;
+      transform: translateX(-50%);
+      z-index: 3;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, #ffd166, #d4af37);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #0b1d3f;
+      font-size: 1.8rem;
+      box-shadow: 0 0 20px rgba(255, 209, 102, 0.6);
+      animation: pulse 2s infinite;
+    }
+
+    /* Selo do envelope */
+    .envelope-seal {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, #ffd166, #d4af37);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #0b1d3f;
+      font-size: 1.5rem;
+      box-shadow: 0 0 15px rgba(255, 209, 102, 0.5);
+      z-index: 1;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(255, 209, 102, 0.5);
+      }
+
+      50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(255, 209, 102, 0.7);
+      }
+
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(255, 209, 102, 0.5);
+      }
+    }
+
+    /* Texto do envelope */
+    .envelope-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
-      padding: clamp(20px, 3vw, 25px);
-      margin-top: 10px;
-      /* border: 2px solid red; */
-      border-top: 1px solid;
-      border-bottom: 1px solid;
-      border-image: linear-gradient(to right, transparent, #ffd700, transparent) 1;
-
+      z-index: 1;
+      width: 80%;
     }
 
-    .day {
-      font-size: clamp(1rem, 4vw, 1.4rem);
-      font-weight: 600;
-      color: #f6b53a;
+    .envelope-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: #ffd166;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      margin-bottom: 10px;
     }
 
-    .time {
-      font-size: clamp(0.9rem, 3.5vw, 1.2rem);
-    }
-
-    .address {
-      font-size: clamp(0.85rem, 3vw, 1rem);
-      font-style: italic;
-      margin-top: 10px;
+    .envelope-message {
+      font-size: 0.9rem;
       color: #e0e0e0;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 1);
       line-height: 1.4;
     }
 
-    .buttons-section {
-      padding: clamp(20px, 3vw, 20px);
+    /* Instrução para clicar */
+    .instruction {
       text-align: center;
-      /* border: 2px solid rgba(255, 0, 0, 0.5); */
-      height: 150px;
-      margin-bottom: 180px;
-
+      margin-top: 30px;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      color: #ffd166;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      animation: pulse 2s infinite;
     }
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: clamp(10px, 3vw, 20px);
-      margin-bottom: clamp(8px, 3vw, 20px);
-    }
-
-    .btn {
-      width: clamp(60px, 18vw, 85px);
-      height: clamp(60px, 18vw, 85px);
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.2), rgba(4, 26, 59, 0.6));
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-      color: #d4af37;
-      font-size: clamp(1.5rem, 6vw, 2.2rem);
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 209, 102, 0.14);
-      box-shadow: 0 0 25px rgba(255, 209, 102, 0.24);
-    }
-
-    .buttons-title {
-      font-size: clamp(0.75rem, 3vw, 1rem);
-      color: #e0e0e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .footer {
-      text-align: center;
-      font-size: clamp(0.75rem, 3vw, 0.9rem);
-      color: #e0e0e0;
-      padding-bottom: clamp(10px, 3vw, 20px);
-    }
-
-    /* Botões com labels */
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .button-label {
-      font-size: clamp(0.65rem, 2.5vw, 0.8rem);
-      color: #fff;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-      text-align: center;
-      max-width: 90px;
-      line-height: 1.2;
-    }
-
-    /* MODAL DRESS CODE */
-    .modal-overlay {
+    /* Efeito de transição */
+    .transition-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(4, 26, 59, 0.9);
+      background: radial-gradient(circle, #0b1d3f, #041a3b);
+      z-index: 1000;
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 1000;
       opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
+      pointer-events: none;
+      transition: opacity 1s ease;
     }
 
-    .modal-overlay.active {
+    .transition-overlay.active {
       opacity: 1;
-      visibility: visible;
+      pointer-events: all;
     }
 
-    .modal-content {
-      background: linear-gradient(to bottom, rgba(4, 26, 59, 0.95), rgba(11, 29, 63, 0.95));
-      border: 2px solid rgba(212, 175, 55, 0.5);
-      border-radius: 16px;
-      padding: clamp(20px, 4vw, 30px);
-      max-width: 90%;
-      width: 400px;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-    }
-
-    .modal-overlay.active .modal-content {
-      transform: scale(1);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      background: none;
-      border: none;
-      color: #ffd166;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .modal-close:hover {
-      color: #f6b53a;
-      transform: scale(1.1);
-    }
-
-    .modal-title {
+    .transition-text {
       font-family: 'Dancing Script', cursive;
-      /* color: #ffd166; */
-      color: #fff;
-      font-size: clamp(2rem, 5vw, 2.5rem);
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-    }
-
-    .dress-code-info {
-      text-align: left;
-      margin: 20px 0;
-    }
-
-    .dress-item {
-      display: flex;
-      align-items: center;
-      margin: 15px 0;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      border-left: 3px solid #ffd166;
-    }
-
-    .dress-icon {
-      font-size: 1.5rem;
+      font-size: clamp(2.5rem, 6vw, 4rem);
       color: #ffd166;
-      margin-right: 15px;
-      width: 30px;
       text-align: center;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+      opacity: 0;
+      transform: translateY(20px);
     }
 
-    .dress-text {
-      flex: 1;
-      font-size: 0.9rem;
-      color: #e0e0e0;
-    }
-
-    .dress-note {
-      font-style: italic;
-      font-size: 0.8rem;
-      color: #f6b53a;
-      margin-top: 15px;
-      text-align: center;
-      padding: 10px;
-      background: rgba(255, 209, 102, 0.1);
-      border-radius: 8px;
-
-    }
-
-    /* Botão de controle de música */
-    .music-control {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      border: none;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.3), rgba(4, 26, 59, 0.7));
-      color: #ffd166;
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-      z-index: 1000;
-      transition: all 0.3s ease;
-    }
-
-    .music-control:hover {
-      transform: scale(1.1);
-      background: rgba(255, 209, 102, 0.2);
-      box-shadow: 0 0 20px rgba(255, 209, 102, 0.5);
-    }
-
-    /* === ADICIONE A MEDIA QUERY AQUI === */
-    /* Media Query para iPhone 8 e iPhone SE (375px) */
+    /* Media Query para telas pequenas */
     @media (max-width: 375px) {
-      .header {
+      .envelope-container {
+        width: 250px;
         height: 170px;
-        margin-top: 80px;
-        padding: 12px 15px;
       }
 
-      .name2 {
-        font-size: 2.8rem;
-      }
-
-      .name:first-child {
-        font-size: 2.3rem;
-      }
-
-      .quote {
-        font-size: 0.8rem;
-        margin-top: 8px;
-      }
-
-      .presence {
-        font-size: 0.85rem;
-        margin-top: 12px;
-      }
-
-      .date {
-        padding: 15px 12px;
-      }
-
-      .day {
-        font-size: 0.95rem;
-      }
-
-      .time {
-        font-size: 0.8rem;
-      }
-
-      .address {
-        font-size: 0.75rem;
-        margin-top: 8px;
-      }
-
-      .buttons-section {
-        padding: 15px 12px;
-        height: 140px;
-        margin-bottom: 160px;
-      }
-
-      .buttons {
-        gap: 12px;
-      }
-
-      .btn {
-        width: 52px;
-        height: 52px;
-        font-size: 1.3rem;
-      }
-
-      .button-label {
-        font-size: 0.6rem;
-        max-width: 65px;
-      }
-
-      .buttons-title {
-        font-size: 0.7rem;
-        gap: 6px;
-      }
-
-      .footer {
-        font-size: 0.7rem;
-        padding-bottom: 8px;
-      }
-
-      /* Ajustes do Modal para telas pequenas */
-      .modal-content {
-        max-width: 95%;
-        width: 340px;
-        padding: 18px;
-      }
-
-      .modal-title {
+      .envelope-name {
         font-size: 1.7rem;
-        margin-bottom: 15px;
       }
 
-      .dress-item {
-        margin: 10px 0;
-        padding: 8px;
+      .envelope-message {
+        font-size: 0.8rem;
       }
 
-      .dress-text {
-        font-size: 0.75rem;
+      .instruction {
+        font-size: 1rem;
       }
 
-      .dress-icon {
-        font-size: 1.1rem;
-        margin-right: 10px;
-        width: 22px;
-      }
-
-      .dress-note {
-        font-size: 0.7rem;
-        margin-top: 12px;
-        padding: 8px;
-      }
-
-      /* Ajuste do botão de música para mobile */
-      .music-control {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-        bottom: 15px;
-        right: 15px;
+      .envelope-seal {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -568,93 +349,35 @@
   <div class="fog"></div>
   <div class="stars" id="stars-container"></div>
 
-  <!-- Botão de controle de música -->
-  <button class="music-control" id="musicControl" title="Controle de Música">
-    <i class="fas fa-volume-up"></i>
-  </button>
+  <div class="transition-container">
+    <div class="envelope-container" id="envelopeContainer">
+      <div class="envelope" id="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-front"></div>
+        <div class="envelope-flap"></div>
 
-  <!-- Modal Dress Code -->
-  <div class="modal-overlay" id="dressCodeModal">
-    <div class="modal-content">
-      <button class="modal-close" id="closeModal">&times;</button>
-      <h2 class="modal-title">Esporte Fino</h2>
-      <div class="dress-code-info">
+        <div class="envelope-bow">
+          <i class="fas fa-moon"></i>
+        </div>
 
-        <!-- <div class="dress-item">
-          <div class="dress-text">
-            <strong>Esporte Fino: </strong> Um estilo elegante, porém confortável e moderno, que equilibra o casual e o
-            formal.
-          </div>
-        </div> -->
-        <!-- <div class="dress-item">
-          <div class="dress-icon">👔</div>
-          <div class="dress-text">
-            <strong>Homens: </strong> Calça social ou de sarja, jeans, camisa social, camisa lisa ou polo. Sapato
-            social, sapatênis.
-          </div>
-        </div> -->
-        <!-- <div class="dress-item">
-          <div class="dress-icon">👗</div>
-          <div class="dress-text">
-            <strong>Mulheres:</strong> Vestidos mais sofisticados, macacões ou conjuntos de alfaiataria.
-          </div>
+        <!-- <div class="envelope-seal">
+          <i class="fas fa-star"></i>
         </div> -->
 
+        <div class="envelope-text">
+          <div class="envelope-name">Gabrielle</div>
+          <div class="envelope-message">Convite de 15 anos</div>
+        </div>
       </div>
-      <div class="dress-note">
-        ✨ Vista-se para celebrar esta noite especial com estilo e conforto!
-      </div>
+    </div>
+
+    <div class="instruction" id="instruction">
+      <i class="fas fa-hand-pointer"></i> Clique para abrir o convite
     </div>
   </div>
 
-  <div class="invitation-card">
-    <div class="header">
-      <div class="name">Meus 15 anos</div>
-      <div class="name2">Gabrielle</div>
-      <div class="quote">"Não tenho certeza de nada, mas a visão das estrelas me faz sonhar."</div>
-      <div class="presence">Conto com a sua presença!</div>
-    </div>
-
-    <div class="divider">
-      <div class="date">
-        <div class="day">QUINTA-FEIRA</div>
-        <div class="time">27 DE NOVEMBRO | 18h30</div>
-        <!-- <div class="quote">Traje: Esporte Fino</div> -->
-        <div class="address">Park Way Q 3 Solar Garden - Park Way, Brasília - DF</div>
-        <div class="presence">*Confirmar até o dia 20/11*</div>
-      </div>
-    </div>
-
-    <div class="buttons-section">
-      <div class="buttons">
-        <div class="button-container">
-          <div class="button-label">CONFIRMAR PRESENÇA</div>
-          <button class="btn" id="confirmBtn" title="Confirmar Presença">
-            <i class="fab fa-whatsapp"></i>
-          </button>
-        </div>
-
-        <div class="button-container">
-          <div class="button-label">VER<br>ROTA</div>
-          <button class="btn" id="locationBtn" title="Ver Localização">
-            <i class="fas fa-map-marker-alt"></i>
-          </button>
-
-        </div>
-
-        <div class="button-container">
-          <div class="button-label">DRESS<br>CODE</div>
-          <button class="btn" id="dressCodeBtn" title="Dress Code">
-            <i class="fas fa-shirt"></i>
-          </button>
-        </div>
-      </div>
-      <div class="buttons-title">
-        <i class="fas fa-hand-pointer"></i> Clique nos botões para interagir
-      </div>
-    </div>
-
-    <div class="footer"></div>
+  <div class="transition-overlay" id="transitionOverlay">
+    <div class="transition-text" id="transitionText"></div>
   </div>
 
   <!-- Áudio da música -->
@@ -665,38 +388,6 @@
   </audio>
 
   <script>
-    // WhatsApp
-    document.getElementById('confirmBtn').addEventListener('click', () => {
-      const phone = '5561984315415';
-      const msg = encodeURIComponent('Olá! Confirmo minha presença na festa de 15 anos da Gabrielle. ✨');
-      window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-    });
-
-    // Localização
-    document.getElementById('locationBtn').addEventListener('click', () => {
-      window.open('https://maps.app.goo.gl/3HcrXZETL6L4LDJs9', '_blank');
-    });
-
-    // Dress Code Modal
-    const dressCodeBtn = document.getElementById('dressCodeBtn');
-    const dressCodeModal = document.getElementById('dressCodeModal');
-    const closeModal = document.getElementById('closeModal');
-
-    dressCodeBtn.addEventListener('click', () => {
-      dressCodeModal.classList.add('active');
-    });
-
-    closeModal.addEventListener('click', () => {
-      dressCodeModal.classList.remove('active');
-    });
-
-    // Fechar modal clicando fora
-    dressCodeModal.addEventListener('click', (e) => {
-      if (e.target === dressCodeModal) {
-        dressCodeModal.classList.remove('active');
-      }
-    });
-
     // Estrelas
     const starsContainer = document.getElementById('stars-container');
     const starCount = Math.min(120, Math.floor(window.innerWidth / 5));
@@ -724,61 +415,99 @@
 
     setInterval(() => Math.random() > 0.7 && shootingStar(), 4000);
 
-    // SISTEMA DE MÚSICA
+    // Elementos da transição
+    const envelopeContainer = document.getElementById('envelopeContainer');
+    const envelope = document.getElementById('envelope');
+    const instruction = document.getElementById('instruction');
+    const transitionOverlay = document.getElementById('transitionOverlay');
+    const transitionText = document.getElementById('transitionText');
     const audio = document.getElementById('musicaConvite');
-    const musicControl = document.getElementById('musicControl');
-    const musicIcon = musicControl.querySelector('i');
 
-    // Tenta iniciar a música automaticamente
-    document.addEventListener('DOMContentLoaded', function () {
+    // Função para abrir o envelope
+    envelopeContainer.addEventListener('click', function () {
+      // Desabilitar clique adicional
+      envelopeContainer.style.pointerEvents = 'none';
+      instruction.style.opacity = '0';
+
+      // Animação de abertura do envelope
+      envelope.classList.add('open');
+
+      // Efeito de elevação
+      envelope.style.transform = 'translateY(-20px) scale(1.1)';
+
+      // Ativar overlay de transição após abertura do envelope
       setTimeout(() => {
-        audio.volume = 0.5; // Volume em 70%
+        transitionOverlay.classList.add('active');
 
-        audio.addEventListener('loadeddata', function () {
-          // Define para começar nos 30 segundos
-          audio.currentTime = 33;
+        // Textos da transição
+        const messages = [
+          "Uma celebração especial...",
+          "Sob as estrelas...",
+          "Para Gabrielle",
+          "15 anos"
+        ];
 
-          // Tenta tocar automaticamente
-          const playPromise = audio.play();
+        let currentMessage = 0;
 
-          if (playPromise !== undefined) {
-            playPromise.catch(function (error) {
-              console.log('Autoplay bloqueado, aguardando interação do usuário');
-              musicControl.style.background = 'radial-gradient(circle, rgba(255, 100, 100, 0.3), rgba(4, 26, 59, 0.7))';
-            });
+        function showNextMessage() {
+          if (currentMessage < messages.length) {
+            transitionText.textContent = messages[currentMessage];
+            transitionText.style.opacity = '0';
+            transitionText.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+              transitionText.style.opacity = '1';
+              transitionText.style.transform = 'translateY(0)';
+              transitionText.style.transition = 'all 0.8s ease';
+            }, 100);
+
+            currentMessage++;
+            setTimeout(showNextMessage, 1200);
+          } else {
+            // Iniciar música
+            audio.volume = 0.5;
+            audio.currentTime = 0;
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+              playPromise.catch(function (error) {
+                console.log('Autoplay bloqueado, aguardando interação do usuário');
+              });
+            }
+
+            // Transição para a página do convite
+            setTimeout(() => {
+              transitionText.style.opacity = '0';
+              transitionText.style.transform = 'translateY(-20px)';
+
+              setTimeout(() => {
+                // Carregar o convite principal
+                loadMainInvitation();
+              }, 800);
+            }, 1200);
           }
-        });
+        }
 
-        // Carrega o áudio
-        audio.load();
-      }, 1000); // Pequeno delay para carregar a página primeiro
+        showNextMessage();
+      }, 1000);
     });
 
-    // Controle de música
-    musicControl.addEventListener('click', function () {
-      if (audio.paused) {
-        audio.currentTime = 33;
-        audio.play();
-        musicIcon.className = 'fas fa-volume-up';
-        musicControl.style.background = 'radial-gradient(circle, rgba(212, 175, 55, 0.3), rgba(4, 26, 59, 0.7))';
-      } else {
-        audio.pause();
-        musicIcon.className = 'fas fa-volume-mute';
-        musicControl.style.background = 'radial-gradient(circle, rgba(255, 100, 100, 0.3), rgba(4, 26, 59, 0.7))';
-      }
-    });
-
-    // Atualiza ícone quando a música termina
-    audio.addEventListener('ended', function () {
-      musicIcon.className = 'fas fa-volume-mute';
-    });
-
-    // Atualiza ícone quando há erro
-    audio.addEventListener('error', function () {
-      musicIcon.className = 'fas fa-exclamation-triangle';
-      musicControl.style.background = 'radial-gradient(circle, rgba(255, 100, 100, 0.5), rgba(4, 26, 59, 0.7))';
-      console.error('Erro ao carregar o áudio');
-    });
+    // Função para carregar o convite principal
+    function loadMainInvitation() {
+      // Criar um iframe para carregar o convite principal
+      const iframe = document.createElement('iframe');
+      iframe.src = 'convite-principal.html'; // Nome do arquivo do convite principal
+      iframe.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        z-index: 2000;
+      `;
+      document.body.appendChild(iframe);
+    }
   </script>
 </body>
 
