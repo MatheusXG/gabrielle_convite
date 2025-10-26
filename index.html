@@ -133,15 +133,16 @@
       align-items: center;
       position: relative;
       z-index: 1;
+      padding: 10px;
     }
 
     /* Envelope */
     .envelope-container {
       position: relative;
-      width: 300px;
-      height: 200px;
+      width: min(300px, 85vw);
+      height: min(200px, 55vw);
       cursor: pointer;
-      margin-bottom: 40px;
+      margin-bottom: min(40px, 8vh);
     }
 
     .envelope {
@@ -200,15 +201,15 @@
       left: 40%;
       transform: translateX(-50%);
       z-index: 3;
-      width: 60px;
-      height: 60px;
+      width: min(60px, 18vw);
+      height: min(60px, 18vw);
       background: radial-gradient(circle, #ffd166, #d4af37);
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #0b1d3f;
-      font-size: 1.8rem;
+      font-size: min(1.8rem, 6vw);
       box-shadow: 0 0 20px rgba(255, 209, 102, 0.6);
       animation: pulse 2s infinite;
     }
@@ -218,15 +219,15 @@
       position: absolute;
       bottom: 20px;
       right: 20px;
-      width: 50px;
-      height: 50px;
+      width: min(50px, 15vw);
+      height: min(50px, 15vw);
       background: radial-gradient(circle, #ffd166, #d4af37);
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #0b1d3f;
-      font-size: 1.5rem;
+      font-size: min(1.5rem, 5vw);
       box-shadow: 0 0 15px rgba(255, 209, 102, 0.5);
       z-index: 1;
       animation: pulse 2s infinite;
@@ -262,14 +263,14 @@
 
     .envelope-name {
       font-family: 'Dancing Script', cursive;
-      font-size: 2rem;
+      font-size: min(2rem, 7vw);
       color: #ffd166;
       text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
       margin-bottom: 10px;
     }
 
     .envelope-message {
-      font-size: 0.9rem;
+      font-size: min(0.9rem, 3.5vw);
       color: #e0e0e0;
       line-height: 1.4;
     }
@@ -282,6 +283,7 @@
       color: #ffd166;
       text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
       animation: pulse 2s infinite;
+      padding: 0 10px;
     }
 
     /* Efeito de transição */
@@ -314,31 +316,89 @@
       text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
       opacity: 0;
       transform: translateY(20px);
+      padding: 0 20px;
     }
 
-    /* Media Query para telas pequenas */
+    /* Media Queries para diferentes tamanhos de tela */
+    @media (max-width: 480px) {
+      .envelope-container {
+        width: min(280px, 80vw);
+        height: min(180px, 50vw);
+      }
+      
+      .envelope-bow {
+        top: -20px;
+      }
+      
+      .envelope-seal {
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+
     @media (max-width: 375px) {
       .envelope-container {
-        width: 250px;
-        height: 170px;
+        width: min(250px, 75vw);
+        height: min(170px, 45vw);
       }
 
       .envelope-name {
-        font-size: 1.7rem;
+        font-size: min(1.7rem, 6.5vw);
       }
 
       .envelope-message {
-        font-size: 0.8rem;
+        font-size: min(0.8rem, 3.2vw);
       }
 
       .instruction {
-        font-size: 1rem;
+        font-size: min(1rem, 4vw);
       }
 
       .envelope-seal {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+        width: min(40px, 12vw);
+        height: min(40px, 12vw);
+        font-size: min(1.2rem, 4.5vw);
+      }
+      
+      .envelope-bow {
+        width: min(50px, 15vw);
+        height: min(50px, 15vw);
+        font-size: min(1.5rem, 5.5vw);
+      }
+    }
+
+    @media (max-width: 320px) {
+      .envelope-container {
+        width: min(220px, 70vw);
+        height: min(150px, 40vw);
+      }
+      
+      .envelope-text {
+        width: 90%;
+      }
+      
+      .instruction {
+        margin-top: 20px;
+      }
+    }
+
+    /* Para telas muito altas */
+    @media (min-height: 800px) and (max-width: 480px) {
+      .envelope-container {
+        margin-bottom: min(60px, 10vh);
+      }
+    }
+
+    /* Para navegadores Samsung específicos */
+    @media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: 480px) {
+      .envelope-container {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+      
+      .envelope {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
       }
     }
   </style>
